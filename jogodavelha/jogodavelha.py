@@ -1,12 +1,9 @@
-# computador que joga aleatório
-# computador só pode jogar nos lugares onde não tem jogadas
-# cada parte na matriz vai ser composto por um número (1 a 9)
-# as jogadas vão ser contabilizadas em uma lista []
 from random import randint
 from time import sleep
 import os
 
-def condicoes(jogo):
+#condicoes: Função onde verifica as possibilidades de Vitória.
+def condicoes(jogo): 
     linha1 = jogo["9"] + jogo["8"] + jogo["7"]
     linha2 = jogo["4"] + jogo["5"] + jogo["6"]
     linha3 = jogo["1"] + jogo["2"] + jogo["3"]
@@ -32,6 +29,7 @@ def condicoes(jogo):
 linha = '-' * 19
 vitoria = ''
 
+#mostrar_jogo: Função onde mostra o jogo atualmente, após todo fim de Round.
 def mostrar_jogo(lst):
     for c in range(7,10):
         c = str(c)
@@ -46,12 +44,14 @@ def mostrar_jogo(lst):
         print(f'|  {lst[e]:3}', end='')
     print('|')
 
+#jogada: Função que verifica se a jogada do jogador é válida. (entre 1 e 9)
 def jogada():
     jogada = 0
     while jogada < 1 or jogada > 9:
         jogada = int(input('Insira sua Jogada (1 - 9) '))
     return jogada
 
+#jogada_player: Função que faz a jogada, e repete a chamada caso a opção já tenha sido preenchida no jogo.
 def jogada_player(lst):
     while True:
         esc = jogada()
@@ -62,14 +62,16 @@ def jogada_player(lst):
     lst[str(esc)] = 'X'
     return(lst)
 
+#jogada_comp: Função que aleatoriza um numero entre 1 e 9 até que seja escolhido uma ooção não jogada.
 def jogada_comp(lst):
     while True:
         esc = randint(1,9)
         if lst[str(esc)] == '':
             break
     lst[str(esc)] = 'O'
-    #return lst
 
+#jogo_velha: Função principal do jogo, onde requisita todas as funções.
+#jogo: Dicionário onde as opções de jogo escolhidas e vazias são memorizadas.
 def jogo_velha():
     jogo = {
         "9": '',
@@ -111,6 +113,7 @@ def jogo_velha():
     elif vitoria == 'JG':
         print('VOCÊ !!!')
 
+#Execução do jogo
 jogo_velha()
 
 
